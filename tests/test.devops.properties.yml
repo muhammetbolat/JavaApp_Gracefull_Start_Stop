@@ -1,0 +1,94 @@
+############################################################################iiiiiiii:q:q############################################
+# DB Configurations
+DB:
+  HOST: XXXXXX
+  PORT: XXXXXX
+  NAME: XXXXXX
+  USERNAME: XXXXXX
+  PASSWORD: XXXXXX
+
+########################################################################################################################
+# SQL Configurations
+routes.select.query: SELECT ROUTE_ID, STOP_DESCRIPTION, STOPPED_TIME, STOPPED_USER FROM STOPPED_ROUTE WHERE ROUTE_ID = '{0}'
+stop.all.routes.insert: INSERT INTO STOPPED_ROUTE (ID, ROUTE_ID, STOP_DESCRIPTION, STOPPED_TIME, STOPPED_USER, INSTANCE_ID, REQUEST_ID) VALUES(1, '{0}', 'Devops Pipeline Deployment', SYSDATE, 'JENKINS', 1, '11111')
+stop.all.routes.delete: DELETE FROM STOPPED_ROUTE WHERE ROUTE_ID = '{0}'
+critical.routes.stop.check: SELECT ROUTE_ID FROM ROUTE_PROCESS WHERE (ROUTE_ID LIKE 'process%' or ROUTE_ID LIKE '%createfile%' ) AND FINISH_TIME IS NULL
+update.routes.stop.information: UPDATE ROUTE_PROCESS SET FINISH_TIME=SYSDATE, ERROR_CODE=-1, ERROR_DESCRIPTION='Hungover routes are killed by Jenkins'  WHERE FINISH_TIME IS NULL
+
+########################################################################################################################
+# Generic Configurations
+APP.TARGET.FILE: javaapp.jar
+APP.RUN.SCRIPT: XXXX
+base.dir: XXX
+startup.command: XXXX
+java.path: /usr/bin/
+########################################################################################################################
+# Log Configuration
+LOG:
+  HEADER: DEVOPS
+  BASE.PATH: /data01/XXXX/DevOps_Start_Stop/logs
+  DEVOPS.APP: devOpsApp.{:%Y-%m-%d}.log
+
+########################################################################################################################
+# Stop application Configuration
+STOP.ALL.ROUTE.ID: STOP_ALL_ROUTES
+ROUTE.TABLE.CHECK.INTERVAL: 100 #Second
+
+
+########################################################################################################################
+# Authorization Configuration
+# Authorization config which to be changed in the application file are declared below.
+# Note: Records must be entered under AUTHSET with the same indention.
+TARGET.FILE: /Users/david/target/conf/application.properties
+
+AUTHSET:
+  # Oracle Main DB properties
+  main.jdbc.url: XXXX
+  main.jdbc.username: XXXXX
+  main.jdbc.password: XXXX
+  main.jdbc.query.timeout: XXXX
+
+  # MySQL ESB Fixed DB properties
+  fixed.jdbc.url: jdbc:mysql://XXXX/XXXXX
+  fixed.jdbc.username: XXXX
+  fixed.jdbc.password: XXXX
+  fixed.jdbc.query.timeout: -1
+
+  # MySQL ESB Mobile DB properties
+  mobile.jdbc.url: jdbc:mysql://XXXXX:3306/XXXXX
+  mobile.jdbc.username: XXXX
+  mobile.jdbc.password: XXXX
+  mobile.jdbc.query.timeout: -1
+
+  # MySQL BTK DB properties
+  btk.jdbc.url: jdbc:mysql://XXXXX:3306/XXXXX
+  btk.jdbc.username: XXXX
+  btk.jdbc.password: XXXX
+  btk.jdbc.query.timeout: -1
+
+  # MySQL GI DB properties
+  gi.jdbc.url: XXXX
+  gi.jdbc.username: XXXX
+  gi.jdbc.password: XXXX
+  gi.jdbc.query.timeout: -1
+
+  # MySQL BOZOK DB Properties
+  bozok.jdbc.url: jdbc:mysql://XXXXX:3306/XXXXX
+  bozok.jdbc.username: XXXXX
+  bozok.jdbc.password: XXXXX
+  bozok.jdbc.query.timeout: -1
+
+
+########################################################################################################################
+# Mail Configuration
+# Mail config which to be changed in the mail properties file are declared below.
+# Note: Records must be entered under MAILSET with the same indention.
+
+MAIL_PROPERTIES.TARGET.FILE: /Users/david/XXXX/target/conf/mail.properties
+MAILSET:
+  mail.smtp.username: XXXX
+  mail.smtp.password: XXXX
+  mail.from: eXX
+  mail.to.invalidRecord: XXXX@gmailL.com,YYYYY@gmail.com
+  mail.to.team.asd: XXXX@gmailL.com,YYYYY@gmail.com
+
